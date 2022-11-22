@@ -119,6 +119,7 @@ map.addLayer({
 }
 });
 });
+
 map.on('click', (event) => {
 const features = map.queryRenderedFeatures(event.point, {
 layers: ['chicago-parks']
