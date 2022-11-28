@@ -26,7 +26,7 @@ function setupMap(center, error) {
     map.on('click', (event) => {
         // If the user clicked on one of your markers, get its information.
         const features = map.queryRenderedFeatures(event.point, {
-            layers: ['illemhelykereso'] // replace with your layer name
+            layers: ['illemhelykeresov2'] // replace with your layer name
         });
         if (!features.length) {
             return;
@@ -38,7 +38,7 @@ function setupMap(center, error) {
             })
             .setLngLat(feature.geometry.coordinates)
             .setHTML(
-                `<h3>${feature.properties.Postalcode} ${feature.properties.City}, ${feature.properties.Address}</h3><p>Nyitva tartás: ${feature.properties.Open}</p>Használati díj: ${feature.properties.Price}<p>Mozgáskorlátozottaknak is? ${feature.properties.Fordis}</p><p>${feature.properties.Postalcode}</p>`
+                `<h3>${feature.properties.Postalcode} ${feature.properties.City}, ${feature.properties.Address}</h3><p>Nyitva tartás: ${feature.properties.Open}</p>Használati díj: ${feature.properties.Price}<p>Mozgáskorlátozottaknak is? ${feature.properties.Fordis}</p><p>${feature.properties.Comment}</p>`
             )
             .addTo(map);
     });
