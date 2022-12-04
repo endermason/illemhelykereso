@@ -32,7 +32,7 @@ function setupMap(center, error) {
             return;
         }
         const feature = features[0];
-        console.log(feature);
+        console.log( JSON.stringify(feature) );
         const popup = new mapboxgl.Popup({
                 offset: [0, -15]
             })

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "206044798585",
+    "project_id": "cityflush",
+    "storage_bucket": "cityflush.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206044798585:android:d125e12f3fb2f0e8217ea8",
+        "android_client_info": {
+          "package_name": "com.cityflush"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206044798585-rdgl6cdl47poraepi9nd8c8d4hk99qh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoO28qRjk2dNH2UMZzT0CiXBdIhjlJHQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206044798585-rdgl6cdl47poraepi9nd8c8d4hk99qh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

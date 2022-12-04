@@ -1,3 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Alkalmazás neve -->
     <string name="app_name">CityFlush</string>
+
+    <!-- Üdvözlő -->
+    <string name="welcome_slide">Üdvözlünk a CityFlush alkalmazásunkban!</string>
+    <string name="welcome_slide_title">Helló!</string>
+    <string name="intro_notif_title">Értesítések</string>
+    <string name="intro_notifications_text">Az alkalmazás néha szeretne értesítést küldeni az eszközödre, de ehhez engedélyre van szükség.</string>
+
+    <!-- Nincs internet -->
+    <string name="error_text">Nincs internet!\nKérlek csatlakozz az internetre az alkalmazás használatához!</string>
+
+    <!-- Verzió -->
+    <string name="version" translatable="false">KOTLIN</string>
+
 </resources>

@@ -12,6 +12,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import com.cityflush.databinding.FragmentMainBinding
+import com.cityflush.isNetworkAvailable
 
 class MainFragment : Fragment() {
 
@@ -48,60 +49,68 @@ class MainFragment : Fragment() {
 
 
         /**
-         *   WebView beállítása
+         *   Van-e net?
          */
-        with(binding.web) {
-            with(settings) {
-                @SuppressLint("SetJavaScriptEnabled")
-                javaScriptEnabled = true
-                //builtInZoomControls = true
-                useWideViewPort = true
-                loadWithOverviewMode = true
-            }
-            setInitialScale(1)
-            scrollBarStyle = View.SCROLLBARS_OUTSIDE_OVERLAY
-            webViewClient = object : WebViewClient() {
-                //Ha végzett a view a betöltéssel, akkor eltűnteti a loader-t
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    binding.progress.visibility = View.GONE
+        if (isNetworkAvailable(this.requireContext())) {
+            //WebView beállítása
+            with(binding.web) {
+                with(settings) {
+                    @SuppressLint("SetJavaScriptEnabled")
+                    javaScriptEnabled = true
+                    useWideViewPort = true
+                    loadWithOverviewMode = true
                 }
-            }
-            //WebChromeClient
-            webChromeClient = object : WebChromeClient() {
-                //Töltés közben a loader progress frissítése
-                override fun onProgressChanged(view: WebView, newProgress: Int) {
-                    binding.progress.progress = newProgress
+                setInitialScale(1)
+                scrollBarStyle = View.SCROLLBARS_OUTSIDE_OVERLAY
+                webViewClient = object : WebViewClient() {
+                    //Ha végzett a view a betöltéssel, akkor eltűnteti a loader-t
+                    override fun onPageFinished(view: WebView?, url: String?) {
+                        binding.progress.visibility = View.GONE
+                    }
                 }
 
-                override fun onGeolocationPermissionsShowPrompt(
-                    origin: String?,
-                    callback: GeolocationPermissions.Callback?
-                ) {
-                    callback?.invoke(origin, true, false)
+                //WebChromeClient
+                webChromeClient = object : WebChromeClient() {
+                    //Töltés közben a loader progress frissítése
+                    override fun onProgressChanged(view: WebView, newProgress: Int) {
+                        binding.progress.progress = newProgress
+                    }
+
+                    //GPS
+                    override fun onGeolocationPermissionsShowPrompt(
+                        origin: String?,
+                        callback: GeolocationPermissions.Callback?
+                    ) {
+                        callback?.invoke(origin, true, false)
+                    }
                 }
+
+                //URL betöltése
+                loadUrl(url)
             }
-            loadUrl(url) //URL betöltése
+
+            //Visszalépés
+            requireActivity().onBackPressedDispatcher.addCallback(
+                viewLifecycleOwner,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        //Ha vissza tud lépni
+                        if (binding.web.canGoBack()) {
+                            //Visszalépés
+                            binding.web.goBack()
+                        } else {
+                            //Bezárja az appot
+                            requireActivity().finish()
+                        }
+                    }
+                })
+        } else {
+            //WebView elűntetése
+            binding.web.visibility = View.GONE
+
+            //Hibaüzenet megjelenítése
+            binding.error.visibility = View.VISIBLE
         }
-
-
-        /**
-         *   Visszalépés
-         */
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    //Ha vissza tud lépni
-                    if (binding.web.canGoBack()) {
-                        //Visszatöltés
-                        binding.web.goBack()
-                    }
-                    else {
-                        //Bezárja az appot
-                        requireActivity().finish()
-                    }
-                }
-            })
 
 
         //VIEW
