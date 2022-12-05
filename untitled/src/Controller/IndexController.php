@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('', name: 'app_home')]
+    #[Route('/', name: 'default')]
     public function home(): Response
     {
         return $this->render('kezdolap.html.twig', [
