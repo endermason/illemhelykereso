@@ -16,7 +16,7 @@ class MapApiController extends AbstractController
             'type'      => 'FeatureCollection',
             'features'  => array()
         );
-        $toilets = $repo->findAll();
+        $toilets = $repo->findBy(["Isaccepted"=>true]);
 
         foreach($toilets as $toilet) {
             $feature = array(
