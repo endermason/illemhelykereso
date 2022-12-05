@@ -20,7 +20,6 @@ class IndexController extends AbstractController
         return $this->render('kezdolap.html.twig', [
             'controller_name' => 'IndexController',
         ]);
-
     }
     #[Route('/index', name: 'app_index')]
     public function index(): Response
