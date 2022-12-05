@@ -14,6 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
+    #[Route('/', name: 'app_home')]
+    public function home(): Response
+    {
+        return $this->render('kezdolap.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+
+    }
     #[Route('/index', name: 'app_index')]
     public function index(): Response
     {
