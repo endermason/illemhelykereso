@@ -553,7 +553,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MITe"
+                "MIT"
             ],
             "authors": [
                 {
