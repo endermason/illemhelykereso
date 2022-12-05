@@ -7,7 +7,6 @@ navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
 })
 
 function successLocation(position) {
-    console.log(position)
     setupMap([position.coords.longitude, position.coords.latitude], false)
 }
 
@@ -18,7 +17,7 @@ function errorLocation() {
 function setupMap(center, error) {
     const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/endermason/claresga1000814mf84f8qxzv',
+        style: 'mapbox://styles/mapbox/streets-v11',
         center: center,
         zoom: 14
     });
@@ -26,13 +25,12 @@ function setupMap(center, error) {
     map.on('click', (event) => {
         // If the user clicked on one of your markers, get its information.
         const features = map.queryRenderedFeatures(event.point, {
-            layers: ['illemhelykeresov2'] // replace with your layer name
+            layers: ['illemhelykeresov3'] // replace with your layer name
         });
         if (!features.length) {
             return;
         }
         const feature = features[0];
-        console.log( JSON.stringify(feature) );
         const popup = new mapboxgl.Popup({
                 offset: [0, -15]
             })
@@ -41,6 +39,37 @@ function setupMap(center, error) {
                 `<h3>${feature.properties.Postalcode} ${feature.properties.City}, ${feature.properties.Address}</h3><p>Nyitva tartás: ${feature.properties.Open}</p>Használati díj: ${feature.properties.Price}<p>Mozgáskorlátozottaknak is? ${feature.properties.Fordis}</p><p>${feature.properties.Comment}</p>`
             )
             .addTo(map);
+    });
+
+
+    map.on('load', () => {
+        // Load an image from an external URL.
+        map.loadImage(
+            'icon.svg',
+            (error_image, image) => {
+                if (error_image) throw error_image;
+
+                // Add the image to the map style.
+                map.addImage('icon', image);
+
+                map.addSource('illemv3', {
+                    type: 'geojson',
+                    // Use a URL for the value for the `data` property.
+                    data: 'api/geojson',
+                });
+
+                map.addLayer({
+                    'id': 'illemhelykeresov3',
+                    'type': 'symbol',
+                    'source': 'illemv3',
+                    'layout': {
+                        'icon-image': 'icon', // reference the image
+                        'icon-size': 0.05,
+                        'icon-allow-overlap':true,
+                    }
+                });
+            }
+        );
     });
 
     if (!error) {
