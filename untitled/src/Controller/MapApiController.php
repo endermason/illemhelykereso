@@ -23,7 +23,7 @@ class MapApiController extends AbstractController
                 'type' => 'Feature',
                 'geometry' => array(
                     'type' => 'Point',
-                    'coordinates' => array($toilet->getGpsCoordinates()[0], $toilet->getGpsCoordinates()[1])
+                    'coordinates' => array($toilet->getGpsCoordinates()[1], $toilet->getGpsCoordinates()[0])
                 ),
                 'properties' => array(
                     'Address' => $toilet->getAddress(),
