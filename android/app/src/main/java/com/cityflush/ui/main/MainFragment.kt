@@ -38,7 +38,7 @@ class MainFragment : Fragment() {
         /**
          *   Weboldal címe
          */
-        val url = "https://maps.google.com/" //TODO
+        val url = "https://cityflush.com/index" //TODO
 
 
         //VIEW
