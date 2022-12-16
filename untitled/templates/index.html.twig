@@ -70,7 +70,7 @@
                 })
                     .setLngLat(feature.geometry.coordinates)
                     .setHTML(
-                        `<h3>${feature.properties.Postalcode} ${feature.properties.City}, ${feature.properties.Address}</h3><p>Nyitva tartás: ${feature.properties.Open}</p>Használati díj: ${feature.properties.Price}<p>Mozgáskorlátozottaknak is? ${fordis}</p><p>${feature.properties.Comment}</p>`
+                        `<h3>${feature.properties.Address}</h3><p>Nyitva tartás: ${feature.properties.Open}</p>Használati díj: ${feature.properties.Price}<p>Mozgáskorlátozottaknak is? ${fordis}</p><p>${feature.properties.Comment}</p>`
                     )
                     .addTo(map);
             });
